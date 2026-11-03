@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a0c">
+  <meta name="description" content="Alter X image enhancement workspace">
+  <title>Alter X</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Alter X home">
+        <span class="brand-mark">A</span><span>ALTER <b>X</b></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="imagine"><span class="nav-icon">⌘</span>Imagine</button>
+        <button class="nav-item" data-page="author"><span class="nav-icon">◎</span>Author</button>
+        <button class="nav-item" data-page="about"><span class="nav-icon">ⓘ</span>About</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span>
+        <span>Workspace ready</span>
+        <span class="version-tag">V1.0</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">A</span> ALTER <b>X</b></div>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-sep">/</span><strong id="page-name">Imagine</strong></div>
+        <div class="top-meta"><span class="runtime-pill"><i></i> UI preview</span><span class="avatar">K</span></div>
+      </header>
+
+      <section class="page active-page" id="page-imagine">
+        <div class="page-heading">
+          <div><div class="eyebrow">IMAGE WORKSPACE</div><h1>Enhance your images.</h1><p class="subheading">Prepare an image and configure an enhancement workflow.</p></div>
+          <div class="heading-version">ALTER X <span>V1.0</span></div>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="panel upload-panel">
+            <div class="panel-head"><div><span class="step">01</span><h2>Source image</h2></div><span class="muted-label">INPUT</span></div>
+            <input id="file-input" type="file" accept="image/*" hidden>
+            <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose an image">
+              <div class="upload-symbol">↑</div>
+              <h3>Drop an image here</h3>
+              <p>or <button class="text-button" id="browse-btn">browse files</button></p>
+              <span class="file-hint">PNG, JPG, WEBP · One image at a time</span>
+            </div>
+            <div class="preview-wrap hidden" id="preview-wrap">
+              <div class="preview-toolbar"><span id="file-name">Selected image</span><button class="quiet-button" id="remove-image">Remove</button></div>
+              <div class="image-stage"><img id="source-preview" alt="Selected source preview"></div>
+              <div class="image-stats">
+                <div><span>DIMENSIONS</span><b id="dimensions">—</b></div>
+                <div><span>FILE SIZE</span><b id="file-size">—</b></div>
+                <div><span>FORMAT</span><b id="file-format">—</b></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel config-panel">
+            <div class="panel-head"><div><span class="step">02</span><h2>Configuration</h2></div><span class="muted-label">SETUP</span></div>
+            <div class="field-group">
+              <label>Processing mode</label>
+              <div class="segmented" role="group" aria-label="Processing mode">
+                <button class="segment selected" data-mode="device">Device</button>
+                <button class="segment" data-mode="cloud">Cloud</button>
+              </div>
+              <p class="field-note" id="mode-note">Local processing is unavailable in this web preview. Native NCNN/Vulkan integration requires a compatible runtime.</p>
+            </div>
+            <div class="field-group">
+              <label for="model-select">AI model</label>
+              <select id="model-select" disabled>
+                <option>Select a verified processing engine</option>
+              </select>
+              <p class="field-note">Model execution is disabled until a compatible engine is integrated.</p>
+            </div>
+            <div class="field-group">
+              <label>Output scale</label>
+              <div class="scale-options">
+                <button class="scale-option" disabled>×2</button>
+                <button class="scale-option selected" disabled>×4</button>
+                <button class="scale-option" disabled>×8</button>
+              </div>
+              <p class="field-note">Scale options are visual placeholders and do not trigger processing.</p>
+            </div>
+            <div class="field-group">
+              <div class="field-label-row"><label>Custom resolution</label><span class="lock-label">ASPECT LOCK <b>ON</b></span></div>
+              <div class="dimension-fields">
+                <div><span>WIDTH</span><input type="number" id="width-input" placeholder="Original" disabled></div>
+                <span class="dimension-x">×</span>
+                <div><span>HEIGHT</span><input type="number" id="height-input" placeholder="Original" disabled></div>
+              </div>
+              <p class="field-note">Resolution controls will be enabled after processing math and limits are verified from the recovered source.</p>
+            </div>
+            <div class="processing-notice"><span class="notice-icon">!</span><div><b>Processing engine not connected</b><p>This preview supports image selection and inspection. AI processing is intentionally disabled until the original implementation or a verified replacement is available.</p></div></div>
+            <button class="primary-button" id="process-btn" disabled><span>✦</span> Start enhancement <span class="button-lock">LOCKED</span></button>
+          </section>
+        </div>
+
+        <section class="panel result-panel">
+          <div class="panel-head"><div><span class="step">03</span><h2>Result preview</h2></div><span class="muted-label">OUTPUT</span></div>
+          <div class="result-empty"><div class="result-icon">◇</div><b>Your enhanced image will appear here</b><p>Connect and verify a processing engine to enable output comparison and export.</p></div>
+          <div class="result-actions"><span class="field-note">No output generated</span><button class="secondary-button" disabled>Save image</button></div>
+        </section>
+        <footer class="page-footer"><span>ALTER X <b>V1.0</b></span><span>Image enhancement workspace</span></footer>
+      </section>
+
+      <section class="page" id="page-author">
+        <div class="page-heading"><div><div class="eyebrow">PROJECT INFORMATION</div><h1>Author</h1><p class="subheading">The developer behind Alter X.</p></div></div>
+        <div class="profile-panel panel">
+          <div class="profile-avatar">K</div>
+          <div class="profile-copy"><span class="eyebrow">DEVELOPER</span><h2>KERVIII</h2><p>Independent developer and maintainer of Alter X.</p><a class="external-link" href="https://github.com/KERVIII" target="_blank" rel="noreferrer">GitHub profile <span>↗</span></a></div>
+          <div class="profile-repo"><span>REPOSITORY</span><b>Coming Soon</b><small>Public repository has not been announced.</small></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-about">
+        <div class="page-heading"><div><div class="eyebrow">ABOUT THE APPLICATION</div><h1>About Alter X</h1><p class="subheading">An image enhancement and upscaling project.</p></div></div>
+        <div class="about-grid">
+          <article class="panel about-main"><span class="eyebrow">WHAT IS ALTER X?</span><h2>Image enhancement, with a focused workflow.</h2><p>Alter X is an application project for enhancing and upscaling images through compatible AI processing engines. The reconstructed interface provides an image workspace, processing configuration, and result presentation.</p><p>Processing features remain disabled in this preview until their runtime and backend requirements are implemented and tested.</p></article>
+          <article class="panel about-details"><span class="eyebrow">PROJECT DETAILS</span><div class="detail-row"><span>Application</span><b>Alter X</b></div><div class="detail-row"><span>Version</span><b>V1.0</b></div><div class="detail-row"><span>Author</span><b>KERVIII</b></div><div class="detail-row"><span>Repository</span><b>Coming Soon</b></div><div class="detail-row"><span>Processing status</span><b class="status-pending">Integration pending</b></div></article>
+          <article class="panel about-wide"><span class="eyebrow">RECOVERED TECHNOLOGY REFERENCES</span><div class="tech-list"><span>Jetpack Compose</span><span>Material 3</span><span>NCNN</span><span>Vulkan</span><span>Replicate API</span></div><p class="field-note">These technologies appear in the original application audit. Their availability in this web project is not implied.</p></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
